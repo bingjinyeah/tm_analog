@@ -22,25 +22,52 @@ void rs485_rx_enable()
 	RS485_nRE = 0;
 }
 
+void delay_ms(uint16_t ms)
+{
+	uint16_t c = 1000;
+	
+	while(ms--){
+		while(c--);
+		c = 1000;
+	}
+}
+
 void get_local_address()
 {
-	uint8_t addr = 000;
+	uint8_t addr = 0x00;
 	
-	addr |= GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_9);
+	delay_ms(10);
+	if(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_6)){
+		addr |= 0x01;
+	}
 	addr <<= 1;
-	addr |= GPIO_ReadOutputDataBit(GPIOE,GPIO_Pin_0);
+	if(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_5)){
+		addr |= 0x01;
+	}
 	addr <<= 1;
-	addr |= GPIO_ReadOutputDataBit(GPIOE,GPIO_Pin_1);
+	if(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_4)){
+		addr |= 0x01;
+	}
 	addr <<= 1;
-	addr |= GPIO_ReadOutputDataBit(GPIOE,GPIO_Pin_2);
+	if(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_3)){
+		addr |= 0x01;
+	}
 	addr <<= 1;
-	addr |= GPIO_ReadOutputDataBit(GPIOE,GPIO_Pin_3);
+	if(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_2)){
+		addr |= 0x01;
+	}
 	addr <<= 1;
-	addr |= GPIO_ReadOutputDataBit(GPIOE,GPIO_Pin_4);
+	if(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_1)){
+		addr |= 0x01;
+	}
 	addr <<= 1;
-	addr |= GPIO_ReadOutputDataBit(GPIOE,GPIO_Pin_5);
+	if(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_0)){
+		addr |= 0x01;
+	}
 	addr <<= 1;
-	addr |= GPIO_ReadOutputDataBit(GPIOE,GPIO_Pin_6);
+	if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_9)){
+		addr |= 0x01;
+	}
 	mb_local_address = addr;
 }
 

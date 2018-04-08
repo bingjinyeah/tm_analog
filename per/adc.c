@@ -16,7 +16,7 @@ void adc_init()
 
 	RCC_ADCCLKConfig(RCC_PCLK2_Div8);
 	/* Enable DMA1 clock */
-	//RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 	RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA|RCC_APB2Periph_ADC1, ENABLE);
 
 	NVIC_InitStructure.NVIC_IRQChannel = ADC1_2_IRQn;

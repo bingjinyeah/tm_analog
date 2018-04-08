@@ -8,9 +8,9 @@
 
 typedef struct{
 	uint16_t saved;
-	uint16_t com_brate;		//0:4.8...1:9.6...2:19.2...3:38.4...4:57.6...5:115.2
-	uint8_t  com_parity;	//0:no parity,1:even,2:odd
-	uint8_t  com_stop;
+	uint16_t  com_brate;		//0:4.8...1:9.6...2:19.2...3:38.4...4:57.6...5:115.2
+	uint16_t  com_parity;	//0:no parity,1:even,2:odd
+	uint16_t  com_stop;
 }Uart4_Cfg;
 
 extern void uart4_send(uint8_t* buf, uint16_t size );

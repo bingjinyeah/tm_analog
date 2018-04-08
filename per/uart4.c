@@ -41,7 +41,7 @@ void uart4_send_dma_init(uint8_t length)
 {
     DMA_InitTypeDef DMA_InitStructure;
 
-	DMA_DeInit(DMA2_Channel5);
+	//DMA_DeInit(DMA2_Channel5);
 	DMA_InitStructure.DMA_PeripheralBaseAddr = UART4_DR_Base;
 	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)rs485_send_buff;
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
@@ -185,17 +185,20 @@ void uart4_port_init()
 void uart4_init()
 {
 	
-	FLASH_ReadMoreData(FLASH_START_ADDRESS,(uint16_t *)&uart4_cfg,sizeof(uart4_cfg));
-	if(uart4_cfg.saved == 0x5a){
+	FLASH_ReadMoreData(FLASH_START_ADDRESS,(uint16_t *)&uart4_cfg,4);
+	if(uart4_cfg.saved == 0x55){
 		MB_HoldReg[1] = uart4_cfg.com_brate;
 		MB_HoldReg[2] = uart4_cfg.com_parity;
 		MB_HoldReg[3] = uart4_cfg.com_stop;
 	}else{
-		uart4_cfg.saved = 0x5a;
+		uart4_cfg.saved = 0x55;
 		uart4_cfg.com_brate = 1;
 		uart4_cfg.com_parity = 0;
 		uart4_cfg.com_stop = 1;
-		FLASH_WriteMoreData(FLASH_START_ADDRESS,(uint16_t *)&uart4_cfg,sizeof(uart4_cfg));
+		MB_HoldReg[1] = uart4_cfg.com_brate;
+		MB_HoldReg[2] = uart4_cfg.com_parity;
+		MB_HoldReg[3] = uart4_cfg.com_stop;
+		FLASH_WriteMoreData(FLASH_START_ADDRESS,(uint16_t *)&uart4_cfg,4);
 	}
 	uart4_port_init();
 }

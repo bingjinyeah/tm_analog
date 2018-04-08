@@ -12,8 +12,8 @@ extern "C" {
 	#define		AI0					PAin(6)
 	#define		AI1					PAin(7)
 	
-	#define		LED_RUN				PBout(10)
-	#define		LED_LINK			PBout(11)
+	#define		LED_RUN				PBout(11)
+	#define		LED_LINK			PBout(10)
 	
 	#define		ADDR7				PBin(9)
 	#define		ADDR6				PEin(0)

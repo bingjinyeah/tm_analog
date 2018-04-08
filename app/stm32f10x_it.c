@@ -184,6 +184,7 @@ void DMA2_Channel4_5_IRQHandler(void)
 	{
 		DMA_ClearFlag(DMA2_FLAG_TE5);
 		DMA_ClearFlag(DMA2_FLAG_TC5);
+		while(USART_GetFlagStatus(UART4, USART_FLAG_TC) == RESET); 
 		rs485_tx_complete();
 	}
 }

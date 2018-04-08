@@ -28,6 +28,8 @@ int main(void)
     while(1){
 		MB_InReg[0] =  (uint16_t)(2500*ADC_Value[0]/4095.0);
 		MB_InReg[1] =  (uint16_t)(2500*ADC_Value[1]/4095.0);
+		//MB_InReg[0] =  (uint16_t)(3.05*ADC_Value[0]);
+		//MB_InReg[1] =  (uint16_t)(3.05*ADC_Value[1]);
 		if(ao_out_value != MB_HoldReg[0]){
 			ao_out_value = MB_HoldReg[0];
 			dac_set_vol(ao_out_value);
